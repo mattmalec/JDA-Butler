@@ -31,14 +31,14 @@ import java.util.regex.Pattern;
 public class JDocUtil {
     static final Logger LOG = LoggerFactory.getLogger("JDoc");
 
-    static final Path LOCAL_DOC_PATH = Paths.get("jda-docs.jar");
+    static final Path LOCAL_DOC_PATH = Paths.get("p4j-docs.jar");
 
     public static final String JAVA_JDOCS_PREFIX = "https://docs.oracle.com/javase/8/docs/api/";
     static final String JAVA_JDOCS_CLASS_INDEX = JAVA_JDOCS_PREFIX + "allclasses-noframe.html";
 
-    public static final String JDOCBASE = JenkinsApi.JDA_JENKINS.jenkinsBase + "javadoc/";
+    public static final String JDOCBASE = JenkinsApi.P4J_JENKINS.jenkinsBase + "javadoc/";
 
-    static final String JDA_CODE_BASE = "net/dv8tion/jda";
+    static final String JDA_CODE_BASE = "com/mattmalec/pterodactyl4j";
 
     private static final Remark REMARK;
 

@@ -7,33 +7,33 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-public class GuildCommand extends Command
+public class PterodactylCommand extends Command
 {
 
     private static final String[] ALIASES = new String[]
-    { "guild", "server" };
+    { "panel" };
 
     @Override
     public void dispatch(final User sender, final TextChannel channel, final Message message, final String content, final GuildMessageReceivedEvent event)
     {
-        reply(event, Bot.INVITE_LINK);
+        reply(event, Bot.PTERODACTYL_INVITE_LINK);
     }
 
     @Override
     public String[] getAliases()
     {
-        return GuildCommand.ALIASES;
+        return PterodactylCommand.ALIASES;
     }
 
     @Override
     public String getHelp()
     {
-        return "shows the invite link for the p4j guild";
+        return "shows the invite link for the pterodactyl guild";
     }
 
     @Override
     public String getName()
     {
-        return "p4j";
+        return "pterodactyl";
     }
 }

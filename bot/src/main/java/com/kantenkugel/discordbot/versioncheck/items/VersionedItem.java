@@ -237,13 +237,13 @@ public abstract class VersionedItem
     public final Role getAnnouncementRole()
     {
         long rid = getAnnouncementRoleId();
-        return rid == 0 ? null : Bot.getGuildJda().getRoleById(rid);
+        return rid == 0 ? null : Bot.getGuildP4J().getRoleById(rid);
     }
 
     public final TextChannel getAnnouncementChannel()
     {
         long cid = getAnnouncementChannelId();
-        return cid == 0 ? null : Bot.getGuildJda().getTextChannelById(cid);
+        return cid == 0 ? null : Bot.getGuildP4J().getTextChannelById(cid);
     }
 
     @Override

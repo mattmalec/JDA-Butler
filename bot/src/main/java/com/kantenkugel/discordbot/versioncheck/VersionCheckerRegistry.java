@@ -62,7 +62,7 @@ public class VersionCheckerRegistry
         //since distinct() preserves first element by definition,
         //this is best way of enforcing jda to be at first position
         if(prependJDA)
-            spaceDelimString = "jda " + spaceDelimString;
+            spaceDelimString = "pterodactyl4j " + spaceDelimString;
 
         String[] split = spaceDelimString.trim().toLowerCase().split("\\s+");
         return Arrays.stream(split)
@@ -92,42 +92,11 @@ public class VersionCheckerRegistry
         /*
             CORE
          */
-        //JDA
-        addItem(new JDAItem());
-        //Lavaplayer
-        addItem(new SimpleVersionedItem("Lavaplayer", RepoType.M2_DV8TION, DependencyType.DEFAULT, "com.sedmelluq", "lavaplayer")
-                .setUrl("https://github.com/sedmelluq/lavaplayer#lavaplayer---audio-player-library-for-discord")
-                .setAliases("lava", "player")
-                .setAnnouncementRoleId(241948768113524762L)     //Lavaplayer Updates
-                .setAnnouncementChannelId(263484072389640193L)  //#lavaplayer
-                .addAnnouncementWhitelist(138092389008015360L)  //sedmelluq
-        );
-        //JDA-Utilities
-        addItem(new SimpleVersionedItem("JDA-Utilities", RepoType.JCENTER, DependencyType.POM, "com.jagrosh", "jda-utilities")
-                .setUrl("https://github.com/JDA-Applications/JDA-Utilities")
-                .setAliases("utils", "jda-utils")
-                .setAnnouncementRoleId(417331483091664896L)     //JDA-Utilities Updates
-                .setAnnouncementChannelId(384483855475933184L)  //#jda-utilities
-                .addAnnouncementWhitelist(113156185389092864L, 211393686628597761L) //Jagrosh, Shengaero (TheMonitorLizard)
-        );
-        /*
-            FEATURED
-         */
-        //Butler
-        addItem(new ButlerItem());
-        //Yui
-        addItem(new YuiItem());
-        //JDAction
-        addItem(new JDActionItem());
-        //LavaLink
-        addItem(new LavalinkItem());
-        /*
-            OTHERS
-         */
-        //RPC
-        addItem(new SimpleVersionedItem("java-discord-rpc", RepoType.JCENTER, DependencyType.DEFAULT, "club.minnced", "java-discord-rpc")
-                .setUrl("https://github.com/MinnDevelopment/java-discord-rpc")
-                .setAliases("rpc")
-        );
+        //Pterodactyl4J
+        addItem(new P4JItem());
+
+        addItem(new PanelItem());
+
+        addItem(new WingsItem());
     }
 }

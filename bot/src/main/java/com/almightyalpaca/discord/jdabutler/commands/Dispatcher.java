@@ -39,8 +39,9 @@ public class Dispatcher extends ListenerAdapter
         this.registerCommand(new DocsCommand(this.reactListReg, this.buttonListener));
         this.registerCommand(new EvalCommand());
         this.registerCommand(new GradleCommand());
-        this.registerCommand(new GradleProjectCommand());
+//        this.registerCommand(new GradleProjectCommand());
         this.registerCommand(new GuildCommand());
+        this.registerCommand(new PterodactylCommand());
         this.registerCommand(new HelpCommand());
 //        this.registerCommand(new JarsCommand());
         this.registerCommand(new MavenCommand());
@@ -53,7 +54,7 @@ public class Dispatcher extends ListenerAdapter
         this.registerCommand(new AnnouncementCommand());
         this.registerCommand(new SoftbanCommand());
         this.registerCommand(new SlowmodeCommand());
-        this.registerCommand(new UpdateCommand());
+//        this.registerCommand(new UpdateCommand());
     }
 
     public Set<Command> getCommands()
@@ -88,12 +89,12 @@ public class Dispatcher extends ListenerAdapter
             }
         }
 
-        final TextChannel channel = event.getChannel();
+//        final TextChannel channel = event.getChannel();
 
-        if (channel.getGuild().getIdLong() == 81384788765712384L                                             // if DAPI
-            && !(channel.getIdLong() == 381889648827301889L                                                  // and not #java_jda
-                || (channel.getParent() != null && channel.getParent().getIdLong() == 356505966201798656L))) // or not testing category
-            return;                                                                                          // ignore message
+//        if (channel.getGuild().getIdLong() == 81384788765712384L                                             // if DAPI
+//            && !(channel.getIdLong() == 381889648827301889L                                                  // and not #java_jda
+//                || (channel.getParent() != null && channel.getParent().getIdLong() == 356505966201798656L))) // or not testing category
+//            return;                                                                                          // ignore message
 
         if (message.toLowerCase().startsWith(prefix.toLowerCase()))
             for (final Command c : this.getCommands())

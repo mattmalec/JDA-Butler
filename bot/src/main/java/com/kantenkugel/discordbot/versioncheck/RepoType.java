@@ -2,10 +2,8 @@ package com.kantenkugel.discordbot.versioncheck;
 
 public enum RepoType
 {
-    M2_DV8TION("m2-dv8tion", "https://m2.dv8tion.net/releases", null),
-    MAVENCENTRAL("central", "https://repo.maven.apache.org/maven2", "mavenCentral"),
-    JCENTER("jcenter", "https://jcenter.bintray.com", "jcenter");
-
+    REPO_MATTMALEC("mattmalec-repo", "https://repo.mattmalec.com/repository/releases", null),
+    MAVENCENTRAL("central", "https://repo.maven.apache.org/maven2", "mavenCentral");
     private final String name;
     private final String repoBase;
     private final String gradleName;

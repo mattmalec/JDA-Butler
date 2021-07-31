@@ -16,7 +16,7 @@ public class VersionsCommand extends Command
 {
 
     private static final String[] ALIASES = { "version", "latest" };
-    private static final String DEFAULT_ITEMS = "jda lavaplayer jda-utilities";
+    private static final String DEFAULT_ITEMS = "pterodactyl4j panel wings";
 
     @Override
     public void dispatch(final User sender, final TextChannel channel, final Message message, final String content, final GuildMessageReceivedEvent event)

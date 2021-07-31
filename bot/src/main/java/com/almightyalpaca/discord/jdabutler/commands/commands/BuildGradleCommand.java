@@ -30,7 +30,7 @@ public class BuildGradleCommand extends Command
         final boolean pretty = content.contains("pretty");
         final boolean kotlin = message.getContentRaw().contains("build.gradle.kts");
 
-        mb.appendCodeBlock(GradleUtil.getBuildFile(kotlin, GradleUtil.DEFAULT_PLUGINS, "com.example.jda.Bot", "1.0", "1.8", items, pretty),
+        mb.appendCodeBlock(GradleUtil.getBuildFile(kotlin, GradleUtil.DEFAULT_PLUGINS, "com.example.p4j", "1.0", "1.8", items, pretty),
                 kotlin ? "kotlin" : "gradle");
         reply(event, mb.build());
     }

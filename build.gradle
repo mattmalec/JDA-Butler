@@ -38,7 +38,3 @@ subprojects {
         implementation 'ch.qos.logback:logback-classic:1.2.3'
     }
 }
-
-project(':launcher') {
-    tasks.run.enabled = false
-}

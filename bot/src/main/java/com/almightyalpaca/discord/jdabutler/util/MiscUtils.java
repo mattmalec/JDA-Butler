@@ -52,7 +52,7 @@ public class MiscUtils
                 new Request.Builder()
                         .post(RequestBody.create(MediaType.parse("text/plain"), text))
                         .url(HASTEBIN_SERVER + "documents")
-                        .header("User-Agent", "Mozilla/5.0 JDA-Butler")
+                        .header("User-Agent", "Mozilla/5.0 P4J-Butler")
                         .build()
         ).execute())
         {

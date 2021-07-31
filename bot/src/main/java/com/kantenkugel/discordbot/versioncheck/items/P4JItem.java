@@ -20,12 +20,10 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.io.IOException;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
-public class JDAItem extends VersionedItem implements UpdateHandler
+public class P4JItem extends VersionedItem implements UpdateHandler
 {
     private final ChangelogProvider changelogProvider;
     private final Supplier<String> versionSupplier;
@@ -34,17 +32,19 @@ public class JDAItem extends VersionedItem implements UpdateHandler
     private final String job;
     private final JenkinsApi jenkins;
 
-    public JDAItem()
+    private static final List<String> aliases = Arrays.asList("p4j");
+
+    public P4JItem()
     {
-        this(JenkinsApi.JDA_JENKINS, 241948671325765632L, 125227483518861312L, "JDA");
+        this(JenkinsApi.P4J_JENKINS, 781255837183639573L, 780230961035608067L, "Pterodactyl4J");
     }
 
-    public JDAItem(JenkinsApi api, long roleId, long channelId, String job)
+    public P4JItem(JenkinsApi api, long roleId, long channelId, String job)
     {
         this.roleId = roleId;
         this.channelId = channelId;
         this.job = job;
-        this.changelogProvider = new JenkinsChangelogProvider(api, "https://github.com/DV8FromTheWorld/JDA/");
+        this.changelogProvider = new JenkinsChangelogProvider(api, "https://github.com/mattmalec/Pterodactyl4J/");
         this.versionSupplier = new JenkinsVersionSupplier(api);
         this.jenkins = api;
     }
@@ -66,9 +66,14 @@ public class JDAItem extends VersionedItem implements UpdateHandler
     }
 
     @Override
+    public List<String> getAliases() {
+        return aliases;
+    }
+
+    @Override
     public RepoType getRepoType()
     {
-        return RepoType.M2_DV8TION;
+        return RepoType.REPO_MATTMALEC;
     }
 
     @Override
@@ -79,13 +84,13 @@ public class JDAItem extends VersionedItem implements UpdateHandler
     @Override
     public String getGroupId()
     {
-        return "net.dv8tion";
+        return "com.mattmalec";
     }
 
     @Override
     public String getArtifactId()
     {
-        return "JDA";
+        return "Pterodactyl4J";
     }
 
     @Override
@@ -122,17 +127,17 @@ public class JDAItem extends VersionedItem implements UpdateHandler
     @Override
     public void onUpdate(VersionedItem item, String previousVersion, boolean shouldAnnounce)
     {
-        boolean isActualJDA = getName().equalsIgnoreCase("jda");
+        boolean isActualJDA = getName().equalsIgnoreCase("pterodactyl4j");
         String version = item.getVersion();
         int buildNumber = Integer.parseInt(version.substring(version.indexOf("_") + 1));
-        if (!isActualJDA || buildNumber != Bot.config.getInt("jda.version.build", -1))
+        if (!isActualJDA || buildNumber != Bot.config.getInt("p4j.version.build", -1))
         {
             Bot.LOG.debug("Update found!");
 
             if(isActualJDA)
             {
-                Bot.config.put("jda.version.build", buildNumber);
-                Bot.config.put("jda.version.name", version);
+                Bot.config.put("p4j.version.build", buildNumber);
+                Bot.config.put("p4j.version.name", version);
 
                 Bot.config.save();
             }
@@ -145,7 +150,7 @@ public class JDAItem extends VersionedItem implements UpdateHandler
             }
             catch(IOException ex)
             {
-                Bot.LOG.warn("Could not fetch latest Jenkins build in JDAItem#onUpdate()", ex);
+                Bot.LOG.warn("Could not fetch latest Jenkins build in P4JItem#onUpdate()", ex);
                 return;
             }
 
@@ -157,11 +162,8 @@ public class JDAItem extends VersionedItem implements UpdateHandler
 
             if(isActualJDA)
             {
-                Bot.EXECUTOR.submit(() ->
-                {
-                    JDoc.reFetch();
-                    GradleProjectDropboxUtil.uploadProject();
-                });
+                //                    GradleProjectDropboxUtil.uploadProject();
+                Bot.EXECUTOR.submit(JDoc::reFetch);
             }
 
             if(!shouldAnnounce)
@@ -177,7 +179,7 @@ public class JDAItem extends VersionedItem implements UpdateHandler
 
             mb.append(announcementRole.getAsMention());
 
-            eb.setAuthor("JDA version " + version + " has been released\n", jenkins.jenkinsBase + buildNumber, EmbedUtil.getJDAIconUrl());
+            eb.setAuthor("P4J version " + version + " has been released\n", jenkins.jenkinsBase + buildNumber, EmbedUtil.getJDAIconUrl());
 
             EmbedUtil.setColor(eb);
 
@@ -208,11 +210,11 @@ public class JDAItem extends VersionedItem implements UpdateHandler
 
             final MessageEmbed embed = eb.build();
 
-            mb.setEmbed(embed);
+            mb.setEmbeds(embed);
 
             final TextChannel channel = getAnnouncementChannel();
 
-            MiscUtils.announce(channel, announcementRole, mb.build(), true);
+            MiscUtils.announce(channel, announcementRole, mb.build(), false);
         }
     }
 }

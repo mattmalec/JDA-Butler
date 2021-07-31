@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class NotifyCommand extends Command
 {
 
-    private static final long BLACKLIST_CHANNEL_ID = 454657809397710859L;
+    private static final long BLACKLIST_CHANNEL_ID = 781258069442297876L;
     private static final String[] ALIASES = { "subscribe" };
 
     private static final TLongSet BLACKLIST = new TLongHashSet();
@@ -34,7 +34,7 @@ public class NotifyCommand extends Command
         final Member member = message.getMember();
         final Guild guild = channel.getGuild();
 
-        if (!guild.equals(Bot.getGuildJda()))
+        if (!guild.equals(Bot.getGuildP4J()))
         {
             this.sendFailed(message);
             return;
@@ -68,13 +68,6 @@ public class NotifyCommand extends Command
                     )
                 ).forEach(embed::addField);
 
-            embed.addField(
-                "JDA-EXPERIMENTAL",
-                "Experimental builds of JDA. Grants access to <#289742061220134912>." +
-                    "\nCommand: `!notify experimental`",
-                false
-            );
-
             reply(event, embed.build());
             return;
         }
@@ -103,8 +96,6 @@ public class NotifyCommand extends Command
                     .filter(Objects::nonNull)
                     .distinct() //just in case 2 items use same announcement role
                     .collect(Collectors.toList());
-            if(content.contains("experimental"))
-                roles.add(VersionCheckerRegistry.EXPERIMENTAL_ITEM.getAnnouncementRole());
             if(roles.size() == 0)
                 respond(message, "No role(s) found for query");
         }
@@ -216,7 +207,7 @@ public class NotifyCommand extends Command
             case "generate":
             case "get":
                 TextChannel searchChannel = msg.getMentionedChannels().isEmpty()
-                        ? VersionCheckerRegistry.getItem("jda").getAnnouncementChannel()
+                        ? VersionCheckerRegistry.getItem("pterodactyl4j").getAnnouncementChannel()
                         : msg.getMentionedChannels().get(0);
                 if(searchChannel == null)
                     reply(event, "Could not determine channel to search in");

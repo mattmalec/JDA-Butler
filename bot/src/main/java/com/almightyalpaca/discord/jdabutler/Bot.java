@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +38,8 @@ public class Bot
 {
     public static Config config;
     public static Dispatcher dispatcher;
-    public static final String INVITE_LINK = "https://discord.gg/0hMr4ce0tIk3pSjp";
+    public static final String INVITE_LINK = "https://discord.gg/7fAabrTJZW";
+    public static final String PTERODACTYL_INVITE_LINK = "https://discord.gg/pterodactyl";
     public static JDAImpl jda;
     public static boolean isStealth = false;
 
@@ -49,37 +51,37 @@ public class Bot
 
     public static final ScheduledExecutorService EXECUTOR = Executors.newSingleThreadScheduledExecutor(MiscUtils.newThreadFactory("main-executor"));
 
-    public static Guild getGuildJda()
+    public static Guild getGuildP4J()
     {
-        return Bot.jda.getGuildById("125227483518861312");
+        return Bot.jda.getGuildById("780230961035608064");
     }
 
     public static Role getRoleBots()
     {
-        return Bot.getGuildJda().getRoleById("125616720156033024");
+        return Bot.getGuildP4J().getRoleById("870826527749726208");
     }
 
     public static Role getRoleStaff()
     {
-        return Bot.getGuildJda().getRoleById("169481978268090369");
+        return Bot.getGuildP4J().getRoleById("781255691214127116");
     }
 
     public static boolean isAdmin(final User user)
     {
-        final Member member = Bot.getGuildJda().getMember(user);
+        final Member member = Bot.getGuildP4J().getMember(user);
         return member != null && member.getRoles().contains(Bot.getRoleStaff());
     }
 
     public static Role getRoleHelper()
     {
-        return Bot.getGuildJda().getRoleById("183963327033114624");
+        return Bot.getGuildP4J().getRoleById("781255798306373655");
     }
 
     public static boolean isHelper(final User user)
     {
         if(isAdmin(user))
             return true;
-        final Member member = Bot.getGuildJda().getMember(user);
+        final Member member = Bot.getGuildP4J().getMember(user);
         return member != null && member.getRoles().contains(Bot.getRoleHelper());
     }
 
@@ -99,10 +101,10 @@ public class Bot
         builder.setMemberCachePolicy(MemberCachePolicy.OWNER.or((member) ->
             // Cache elevated members for specific whitelists
             // this is required for isAdmin and isHelper to work properly
-            member.getGuild().getIdLong() == 125227483518861312L //JDA Guild
+            member.getGuild().getIdLong() == 780230961035608064L //P4J Guild
                 && member.getRoles().stream().mapToLong(Role::getIdLong).anyMatch(role ->
-                    role == 169481978268090369L || // staff
-                    role == 183963327033114624L)   // helper
+                    role == 781255691214127116L || // staff
+                    role == 781255798306373655L)   // helper
         ));
         builder.setBulkDeleteSplittingEnabled(false);
 
@@ -111,7 +113,7 @@ public class Bot
         builder.addEventListeners(Bot.listener);
         builder.addEventListeners(Bot.dispatcher = new Dispatcher());
 
-        builder.setActivity(Activity.playing("JDA"));
+        builder.setActivity(Activity.playing("Pterodactyl4J"));
 
         Bot.jda = (JDAImpl) builder.build().awaitReady();
 
@@ -145,17 +147,26 @@ public class Bot
         EXECUTOR.submit(() ->
         {
             VersionCheckerRegistry.init();
-            VersionedItem jdaItem = VersionCheckerRegistry.getItem("jda");
-            if(jdaItem.getVersion() != null && jdaItem.parseVersion().build != config.getInt("jda.version.build"))
+            VersionedItem jdaItem = VersionCheckerRegistry.getItem("pterodactyl4j");
+            if(jdaItem.getVersion() != null && jdaItem.parseVersion().build != config.getInt("p4j.version.build"))
             {
                 //do not announce here as that might cause duplicate announcements when a new instance is fired up (or a very old one)
-                jdaItem.getUpdateHandler().onUpdate(jdaItem, config.getString("jda.version.name"), false);
+                jdaItem.getUpdateHandler().onUpdate(jdaItem, config.getString("p4j.version.name"), false);
             }
             else
             {
-                GradleProjectDropboxUtil.fetchUrl();
+//                GradleProjectDropboxUtil.fetchUrl();
             }
         });
+        System.out.println("Bot is ready!");
+
+        Scanner scanner = new Scanner(System.in);
+
+        while(scanner.hasNext()) {
+            String command = scanner.nextLine();
+            if (command.equals("!end"))
+                shutdown();
+        }
     }
 
     public static void shutdown()

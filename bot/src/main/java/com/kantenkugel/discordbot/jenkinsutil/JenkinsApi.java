@@ -13,8 +13,8 @@ import java.io.IOException;
 
 public class JenkinsApi
 {
-    public static final String JDA_JENKINS_BASE = "https://ci.dv8tion.net";
-    public static final JenkinsApi JDA_JENKINS = JenkinsApi.forConfig(JDA_JENKINS_BASE, "JDA");
+    public static final String P4J_JENKINS_BASE = "https://ci.mattmalec.com";
+    public static final JenkinsApi P4J_JENKINS = JenkinsApi.forConfig(P4J_JENKINS_BASE, "Pterodactyl4J");
 
     /**
      * Returns a new JenkinsApi instance for given configuration

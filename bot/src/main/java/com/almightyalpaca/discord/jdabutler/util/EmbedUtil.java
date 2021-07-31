@@ -8,16 +8,16 @@ import java.awt.Color;
 public class EmbedUtil
 {
 
-    public static final Color COLOR_JDA_PURPLE = Color.decode("#9158BC");
+    public static final Color COLOR_P4J_BLUE = Color.decode("#134C8E");
 
     public static String getJDAIconUrl()
     {
-        return Bot.getGuildJda().getIconUrl();
+        return Bot.getGuildP4J().getIconUrl();
     }
 
     public static void setColor(final EmbedBuilder builder)
     {
-        builder.setColor(EmbedUtil.COLOR_JDA_PURPLE);
+        builder.setColor(EmbedUtil.COLOR_P4J_BLUE);
     }
 
 }

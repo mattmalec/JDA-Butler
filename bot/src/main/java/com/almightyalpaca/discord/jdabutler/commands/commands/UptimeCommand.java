@@ -24,12 +24,12 @@ public class UptimeCommand extends Command
         final long seconds = duration / 1000L % 60;
 
         String uptime = "";
-        uptime += years == 0 ? "" : years + " Year" + (years > 1 ? "s" : "") + ", ";
-        uptime += months == 0 ? "" : months + " Month" + (months > 1 ? "s" : "") + ", ";
-        uptime += days == 0 ? "" : days + " Day" + (days > 1 ? "s" : "") + ", ";
-        uptime += hours == 0 ? "" : hours + " Hour" + (hours > 1 ? "s" : "") + ", ";
-        uptime += minutes == 0 ? "" : minutes + " Minute" + (minutes > 1 ? "s" : "") + ", ";
-        uptime += seconds == 0 ? "" : seconds + " Second" + (seconds > 1 ? "s" : "") + ", ";
+        uptime += years == 0 ? "" : years + " year" + (years > 1 ? "s" : "") + ", ";
+        uptime += months == 0 ? "" : months + " month" + (months > 1 ? "s" : "") + ", ";
+        uptime += days == 0 ? "" : days + " day" + (days > 1 ? "s" : "") + ", ";
+        uptime += hours == 0 ? "" : hours + " hour" + (hours > 1 ? "s" : "") + ", ";
+        uptime += minutes == 0 ? "" : minutes + " minute" + (minutes > 1 ? "s" : "") + ", ";
+        uptime += seconds == 0 ? "" : seconds + " second" + (seconds > 1 ? "s" : "") + ", ";
 
         uptime = StringUtils.replaceLast(uptime, ", ", "");
         uptime = StringUtils.replaceLast(uptime, ",", " and");

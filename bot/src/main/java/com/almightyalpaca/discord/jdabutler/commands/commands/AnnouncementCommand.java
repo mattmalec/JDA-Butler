@@ -26,7 +26,7 @@ public class AnnouncementCommand extends Command
     @Override
     public void dispatch(final User sender, final TextChannel channel, final Message message, final String content, final GuildMessageReceivedEvent event)
     {
-        if(!channel.getGuild().equals(Bot.getGuildJda()))
+        if(!channel.getGuild().equals(Bot.getGuildP4J()))
         {
             this.sendFailed(message);
             return;
@@ -68,7 +68,7 @@ public class AnnouncementCommand extends Command
                     return;
                 }
                 role = item.getAnnouncementRole();
-                if(item.getName().equalsIgnoreCase("jda"))
+                if(item.getName().equalsIgnoreCase("pterodactyl4j"))
                     image = EmbedUtil.getJDAIconUrl();
                 if(role == null)
                 {
@@ -83,8 +83,8 @@ public class AnnouncementCommand extends Command
                     .filter(i -> i.getAnnouncementRoleId() != 0 && i.getAnnouncementChannelId() == channel.getIdLong()
                             && (Bot.isAdmin(sender) || i.canAnnounce(sender)))
                     .collect(Collectors.toList());
-            if(channel.getIdLong() == EXPERIMENTAL_ITEM.getAnnouncementChannelId() && Bot.isAdmin(sender))
-                items.add(EXPERIMENTAL_ITEM);
+//            if(channel.getIdLong() == EXPERIMENTAL_ITEM.getAnnouncementChannelId() && Bot.isAdmin(sender))
+//                items.add(EXPERIMENTAL_ITEM);
             switch(items.size())
             {
                 case 0:
@@ -98,7 +98,7 @@ public class AnnouncementCommand extends Command
                         reply(event, "Item has invalid role id set up");
                         return;
                     }
-                    if(item.getName().equalsIgnoreCase("jda") || item == EXPERIMENTAL_ITEM)
+                    if(item.getName().equalsIgnoreCase("pterodactyl4j") || item == EXPERIMENTAL_ITEM)
                         image = EmbedUtil.getJDAIconUrl();
                     break;
                 default:
@@ -120,9 +120,9 @@ public class AnnouncementCommand extends Command
         eb.setThumbnail(image);
         eb.setFooter(sender.getName(), sender.getEffectiveAvatarUrl());
 
-        mb.setEmbed(eb.build());
+        mb.setEmbeds(eb.build());
 
-        MiscUtils.announce(channel, role, mb.build(), true);
+        MiscUtils.announce(channel, role, mb.build(), false);
 
     }
 

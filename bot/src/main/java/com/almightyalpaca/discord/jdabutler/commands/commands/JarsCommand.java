@@ -24,23 +24,23 @@ public class JarsCommand extends Command
 
         final EmbedBuilder eb = new EmbedBuilder();
         EmbedUtil.setColor(eb);
-        eb.setAuthor("Latest JDA jars", null, EmbedUtil.getJDAIconUrl());
+        eb.setAuthor("Latest Pterodactyl4J jars", null, EmbedUtil.getJDAIconUrl());
         eb.setTitle(EmbedBuilder.ZERO_WIDTH_SPACE, null);
 
         try
         {
-            JenkinsBuild lastBuild = JenkinsApi.JDA_JENKINS.getLastSuccessfulBuild();
+            JenkinsBuild lastBuild = JenkinsApi.P4J_JENKINS.getLastSuccessfulBuild();
             if(lastBuild == null)
             {
                 reply(event, "Could not get Artifact-data from CI!");
                 return;
             }
 
-            eb.addField("jar", "[download](" + lastBuild.artifacts.get("JDA").getLink() + ")", true);
-            eb.addField("javadoc", "[download](" + lastBuild.artifacts.get("JDA-javadoc").getLink() + ")", true);
-            eb.addField("sources", "[download](" + lastBuild.artifacts.get("JDA-sources").getLink() + ")", true);
-            eb.addField("withDependencies", "[(normal)](" + lastBuild.artifacts.get("JDA-withDependencies").getLink() + ") " +
-                    "[(no-opus)](" + lastBuild.artifacts.get("JDA-withDependencies-no-opus").getLink() + ")", true);
+            eb.addField("jar", "[download](" + lastBuild.artifacts.get("Pterodactyl4J").getLink() + ")", true);
+            eb.addField("javadoc", "[download](" + lastBuild.artifacts.get("Pterodactyl4J-javadoc").getLink() + ")", true);
+            eb.addField("sources", "[download](" + lastBuild.artifacts.get("Pterodactyl4J-sources").getLink() + ")", true);
+//            eb.addField("withDependencies", "[(normal)](" + lastBuild.artifacts.get("JDA-withDependencies").getLink() + ") " +
+//                    "[(no-opus)](" + lastBuild.artifacts.get("JDA-withDependencies-no-opus").getLink() + ")", true);
 
             reply(event, eb.build());
         }

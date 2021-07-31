@@ -37,7 +37,7 @@ public class ChangelogCommand extends Command
         if(item == null)
         {
             versionStart = 0;
-            item = VersionCheckerRegistry.getItem("jda");
+            item = VersionCheckerRegistry.getItem("pterodactyl4j");
         }
 
         ChangelogProvider clProvider = item.getChangelogProvider();
@@ -127,7 +127,7 @@ public class ChangelogCommand extends Command
     @Override
     public String getHelp()
     {
-        return "`!changelog VERSION [VERSION2]` - Shows changes for some JDA version";
+        return "`!changelog VERSION [VERSION2]` - Shows changes for some P4J version";
     }
 
     @Override

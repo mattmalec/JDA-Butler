@@ -227,7 +227,7 @@ public class JDoc {
         JDocUtil.LOG.info("Initializing Docs...");
         download();
         fetch();
-        JDocUtil.LOG.debug("JDA-Docs initialized, Fetching Java8 class indexes");
+        JDocUtil.LOG.debug("P4J-Docs initialized, Fetching Java8 class indexes");
         fetchJavaClassIndexes();
         JDocUtil.LOG.info("Docs initialized");
     }
@@ -255,11 +255,11 @@ public class JDoc {
 
     private static void download() {
         try {
-            JenkinsBuild lastBuild = JenkinsApi.JDA_JENKINS.getLastSuccessfulBuild();
+            JenkinsBuild lastBuild = JenkinsApi.P4J_JENKINS.getLastSuccessfulBuild();
             if(lastBuild != null) {
-                JDocUtil.LOG.debug("Downloading JDA docs...");
+                JDocUtil.LOG.debug("Downloading P4J docs...");
                 try {
-                    String artifactUrl = lastBuild.artifacts.get("JDA-javadoc").getLink();
+                    String artifactUrl = lastBuild.artifacts.get("Pterodactyl4J-javadoc").getLink();
                     try(Response res = Bot.httpClient.newCall(new Request.Builder()
                             .url(artifactUrl).get().build()).execute()) {
                         if(!res.isSuccessful()) {
@@ -267,7 +267,7 @@ public class JDoc {
                             return;
                         }
                         Files.copy(res.body().byteStream(), JDocUtil.LOCAL_DOC_PATH, StandardCopyOption.REPLACE_EXISTING);
-                        JDocUtil.LOG.debug("Done downloading JDA docs");
+                        JDocUtil.LOG.debug("Done downloading P4J docs");
                     }
                 }
                 catch(Exception e) {

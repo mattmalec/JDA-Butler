@@ -132,12 +132,12 @@ public class DocsCommand extends ReactionCommand
             Documentation documentation = search.get(index);
             embed.appendDescription('[' + documentation.getShortTitle() + "](" + documentation.getUrl(jDocBase) + ")\n");
         }
-        return new MessageBuilder().setEmbed(embed.build()).build();
+        return new MessageBuilder().setEmbeds(embed.build()).build();
     }
 
     private static EmbedBuilder getDefaultEmbed()
     {
-        return new EmbedBuilder().setAuthor("JDA Javadocs", null, EmbedUtil.getJDAIconUrl()).setColor(EmbedUtil.COLOR_JDA_PURPLE);
+        return new EmbedBuilder().setAuthor("P4J Javadocs", null, EmbedUtil.getJDAIconUrl()).setColor(EmbedUtil.COLOR_P4J_BLUE);
     }
 
     @Override
@@ -161,9 +161,9 @@ public class DocsCommand extends ReactionCommand
                 + "When specified (with parameter types), only the specific one is returned.\n"
                 + "\n"
                 + "__Examples__:\n"
-                + "`" + cmd + " JDA#getUserById`\n"
-                + "`" + cmd + " TextChannel.sendMessage`\n"
-                + "`" + cmd + " TextChannel.sendMessage(Message)`\n"
+                + "`" + cmd + " ApplicationServer#getName`\n"
+                + "`" + cmd + " PteroApplication.retrieveServerById`\n"
+                + "`" + cmd + " PteroApplication.retrieveServerById(String)`\n"
                 + "\n"
                 + "**Search Mode**\n"
                 + "When in `search` mode, `.` and `#` won't work and all documentations that **contain** `term` in their name/signature are returned.\n"
@@ -174,12 +174,12 @@ public class DocsCommand extends ReactionCommand
                 + "   `cs ` - to make matching case-sensitive\n"
                 + "\n"
                 + "__Examples__:\n"
-                + "`" + cmd + " search:onGuildMember`\n"
-                + "`" + cmd + " search:c:join`\n"
-                + "`" + cmd + " search:f:getTextChannel`\n"
+                + "`" + cmd + " search:onConsoleOutput`\n"
+                + "`" + cmd + " search:c:application`\n"
+                + "`" + cmd + " search:f:getNode`\n"
                 + "\n"
                 + "**Java JDK Mode**\n"
-                + "When in `java` mode, java 8 docs are searched instead. Syntax for `term` is the same as `standard` mode.\n"
+                + "When in `java` mode, Java 8 docs are searched instead. Syntax for `term` is the same as `standard` mode.\n"
                 + "\n"
                 + "__Examples__:\n"
                 +  "`" + cmd + " java:BufferedInputStream`\n"

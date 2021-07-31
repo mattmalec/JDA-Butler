@@ -47,7 +47,7 @@ public class GradleCommand extends Command
     @Override
     public String getHelp()
     {
-        return "Shows the gradle `compile ...` line";
+        return "Shows the gradle `implementation ...` line";
     }
 
     @Override
