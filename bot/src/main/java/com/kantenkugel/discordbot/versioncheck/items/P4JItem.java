@@ -32,11 +32,11 @@ public class P4JItem extends VersionedItem implements UpdateHandler
     private final String job;
     private final JenkinsApi jenkins;
 
-    private static final List<String> aliases = Arrays.asList("p4j");
+    private static final List<String> aliases = Collections.singletonList("p4j");
 
     public P4JItem()
     {
-        this(JenkinsApi.P4J_JENKINS, 781255837183639573L, 780230961035608067L, "Pterodactyl4J");
+        this(JenkinsApi.P4J_JENKINS, 781255837183639573L, 781256979729481748L, "Pterodactyl4J");
     }
 
     public P4JItem(JenkinsApi api, long roleId, long channelId, String job)
