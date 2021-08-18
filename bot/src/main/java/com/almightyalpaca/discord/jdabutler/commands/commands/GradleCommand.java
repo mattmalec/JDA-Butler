@@ -2,6 +2,7 @@ package com.almightyalpaca.discord.jdabutler.commands.commands;
 
 import com.almightyalpaca.discord.jdabutler.commands.Command;
 import com.almightyalpaca.discord.jdabutler.util.EmbedUtil;
+import com.almightyalpaca.discord.jdabutler.util.MiscUtils;
 import com.almightyalpaca.discord.jdabutler.util.gradle.GradleUtil;
 import com.kantenkugel.discordbot.versioncheck.VersionCheckerRegistry;
 import com.kantenkugel.discordbot.versioncheck.items.VersionedItem;
@@ -30,6 +31,9 @@ public class GradleCommand extends Command
 
         final boolean pretty = content.contains("pretty");
         final boolean kotlin = message.getContentRaw().contains("gradle.kts");
+
+        if (content.contains("logging"))
+            items.add(MiscUtils.LOGBACK_CLASSIC);
 
         final String lang = kotlin ? "kotlin" : "gradle";
         String description = String.format("If you don't know gradle type `!build.gradle%s` for a complete gradle build file", kotlin ? ".kts" : "")

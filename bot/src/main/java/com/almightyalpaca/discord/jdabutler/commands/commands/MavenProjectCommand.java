@@ -41,6 +41,9 @@ public class MavenProjectCommand extends Command
                 .filter(item -> item.getGroupId() != null && item.getArtifactId() != null && item.getRepoType() != null)
                 .collect(Collectors.toList());
 
+        if (content.contains("logging"))
+            items.add(MiscUtils.LOGBACK_CLASSIC);
+
         //dependency-string:
         String dependencyString = MavenUtil.getDependencyBlock(items, "    ");
 

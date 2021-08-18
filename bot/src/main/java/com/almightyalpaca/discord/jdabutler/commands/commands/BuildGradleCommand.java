@@ -1,6 +1,7 @@
 package com.almightyalpaca.discord.jdabutler.commands.commands;
 
 import com.almightyalpaca.discord.jdabutler.commands.Command;
+import com.almightyalpaca.discord.jdabutler.util.MiscUtils;
 import com.almightyalpaca.discord.jdabutler.util.gradle.GradleUtil;
 import com.kantenkugel.discordbot.versioncheck.VersionCheckerRegistry;
 import com.kantenkugel.discordbot.versioncheck.items.VersionedItem;
@@ -29,6 +30,9 @@ public class BuildGradleCommand extends Command
 
         final boolean pretty = content.contains("pretty");
         final boolean kotlin = message.getContentRaw().contains("build.gradle.kts");
+
+        if (content.contains("logging"))
+            items.add(MiscUtils.LOGBACK_CLASSIC);
 
         mb.appendCodeBlock(GradleUtil.getBuildFile(kotlin, GradleUtil.DEFAULT_PLUGINS, "com.example.p4j", "1.0", "1.8", items, pretty),
                 kotlin ? "kotlin" : "gradle");

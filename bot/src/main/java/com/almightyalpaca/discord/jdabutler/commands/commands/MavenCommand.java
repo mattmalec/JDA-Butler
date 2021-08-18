@@ -3,6 +3,7 @@ package com.almightyalpaca.discord.jdabutler.commands.commands;
 import com.almightyalpaca.discord.jdabutler.commands.Command;
 import com.almightyalpaca.discord.jdabutler.util.EmbedUtil;
 import com.almightyalpaca.discord.jdabutler.util.MavenUtil;
+import com.almightyalpaca.discord.jdabutler.util.MiscUtils;
 import com.kantenkugel.discordbot.versioncheck.VersionCheckerRegistry;
 import com.kantenkugel.discordbot.versioncheck.items.VersionedItem;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -25,6 +26,9 @@ public class MavenCommand extends Command
                 //only allow items which use maven for versioning
                 .filter(item -> item.getGroupId() != null && item.getArtifactId() != null && item.getRepoType() != null)
                 .collect(Collectors.toList());
+
+        if (content.contains("logging"))
+            items.add(MiscUtils.LOGBACK_CLASSIC);
 
         String desc = "If you don't know maven type `!pom.xml` for a complete maven build file\n\n```xml\n" +
                 MavenUtil.getDependencyBlock(items, null) +
