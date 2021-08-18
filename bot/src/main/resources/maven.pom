@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>example-bot</artifactId>
+    <artifactId>example-project</artifactId>
     <version>1.0</version>
 
     <properties>
