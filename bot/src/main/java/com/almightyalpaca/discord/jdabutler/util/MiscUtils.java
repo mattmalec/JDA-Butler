@@ -1,6 +1,8 @@
 package com.almightyalpaca.discord.jdabutler.util;
 
 import com.almightyalpaca.discord.jdabutler.Bot;
+import com.kantenkugel.discordbot.versioncheck.items.LogbackItem;
+import com.kantenkugel.discordbot.versioncheck.items.VersionedItem;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -17,7 +19,9 @@ import java.util.concurrent.TimeUnit;
 
 public class MiscUtils
 {
-    private static String HASTEBIN_SERVER = "https://hastebin.de/"; //requires trailing slash
+    private final static String HASTEBIN_SERVER = "https://haste.mattmalec.com/"; //requires trailing slash
+
+    public static final VersionedItem LOGBACK_CLASSIC = new LogbackItem();
 
     public static ThreadFactory newThreadFactory(String threadName)
     {
@@ -52,7 +56,7 @@ public class MiscUtils
                 new Request.Builder()
                         .post(RequestBody.create(MediaType.parse("text/plain"), text))
                         .url(HASTEBIN_SERVER + "documents")
-                        .header("User-Agent", "Mozilla/5.0 P4J-Butler")
+                        .header("User-Agent", "Mozilla/5.0 P4J-Helper")
                         .build()
         ).execute())
         {
